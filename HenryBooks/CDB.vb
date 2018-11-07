@@ -64,7 +64,7 @@ Public Class CDB
         Catch ex As Exception
             MessageBox.Show("Failed to get data adapter: " & ex.ToString, "Database error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-        Return Nothing
+        Return sqlDA
     End Function
 
     Public Function ExecSP(ByVal strSP As String, ByRef params As ArrayList) As Integer
