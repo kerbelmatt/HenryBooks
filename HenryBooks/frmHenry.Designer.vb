@@ -22,23 +22,26 @@ Partial Class frmHenry
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.grpData = New System.Windows.Forms.GroupBox()
-        Me.lblSelect = New System.Windows.Forms.Label()
-        Me.cboTable = New System.Windows.Forms.ComboBox()
         Me.btnShow = New System.Windows.Forms.Button()
+        Me.cboTable = New System.Windows.Forms.ComboBox()
+        Me.lblSelect = New System.Windows.Forms.Label()
         Me.grpSearch = New System.Windows.Forms.GroupBox()
-        Me.lblSearch = New System.Windows.Forms.Label()
-        Me.cboSearch = New System.Windows.Forms.ComboBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtVal = New System.Windows.Forms.TextBox()
         Me.btnSearch = New System.Windows.Forms.Button()
+        Me.txtVal = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cboSearch = New System.Windows.Forms.ComboBox()
+        Me.lblSearch = New System.Windows.Forms.Label()
         Me.grpInventory = New System.Windows.Forms.GroupBox()
         Me.dgrInventory = New System.Windows.Forms.DataGridView()
         Me.btnExit = New System.Windows.Forms.Button()
+        Me.errP = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.grpData.SuspendLayout()
         Me.grpSearch.SuspendLayout()
         Me.grpInventory.SuspendLayout()
         CType(Me.dgrInventory, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.errP, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'grpData
@@ -53,14 +56,14 @@ Partial Class frmHenry
         Me.grpData.TabStop = False
         Me.grpData.Text = "Display Table Data"
         '
-        'lblSelect
+        'btnShow
         '
-        Me.lblSelect.AutoSize = True
-        Me.lblSelect.Location = New System.Drawing.Point(6, 27)
-        Me.lblSelect.Name = "lblSelect"
-        Me.lblSelect.Size = New System.Drawing.Size(69, 13)
-        Me.lblSelect.TabIndex = 0
-        Me.lblSelect.Text = "Select table:"
+        Me.btnShow.Location = New System.Drawing.Point(223, 61)
+        Me.btnShow.Name = "btnShow"
+        Me.btnShow.Size = New System.Drawing.Size(75, 23)
+        Me.btnShow.TabIndex = 2
+        Me.btnShow.Text = "Show Data"
+        Me.btnShow.UseVisualStyleBackColor = True
         '
         'cboTable
         '
@@ -71,14 +74,14 @@ Partial Class frmHenry
         Me.cboTable.Size = New System.Drawing.Size(218, 21)
         Me.cboTable.TabIndex = 1
         '
-        'btnShow
+        'lblSelect
         '
-        Me.btnShow.Location = New System.Drawing.Point(223, 61)
-        Me.btnShow.Name = "btnShow"
-        Me.btnShow.Size = New System.Drawing.Size(75, 23)
-        Me.btnShow.TabIndex = 2
-        Me.btnShow.Text = "Show Data"
-        Me.btnShow.UseVisualStyleBackColor = True
+        Me.lblSelect.AutoSize = True
+        Me.lblSelect.Location = New System.Drawing.Point(6, 27)
+        Me.lblSelect.Name = "lblSelect"
+        Me.lblSelect.Size = New System.Drawing.Size(69, 13)
+        Me.lblSelect.TabIndex = 0
+        Me.lblSelect.Text = "Select table:"
         '
         'grpSearch
         '
@@ -94,14 +97,30 @@ Partial Class frmHenry
         Me.grpSearch.TabStop = False
         Me.grpSearch.Text = "Search"
         '
-        'lblSearch
+        'btnSearch
         '
-        Me.lblSearch.AutoSize = True
-        Me.lblSearch.Location = New System.Drawing.Point(7, 25)
-        Me.lblSearch.Name = "lblSearch"
-        Me.lblSearch.Size = New System.Drawing.Size(110, 13)
-        Me.lblSearch.TabIndex = 0
-        Me.lblSearch.Text = "Search inventory by:"
+        Me.btnSearch.Location = New System.Drawing.Point(408, 85)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(75, 23)
+        Me.btnSearch.TabIndex = 4
+        Me.btnSearch.Text = "Search"
+        Me.btnSearch.UseVisualStyleBackColor = True
+        '
+        'txtVal
+        '
+        Me.txtVal.Location = New System.Drawing.Point(123, 53)
+        Me.txtVal.Name = "txtVal"
+        Me.txtVal.Size = New System.Drawing.Size(360, 22)
+        Me.txtVal.TabIndex = 3
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(7, 56)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(38, 13)
+        Me.Label1.TabIndex = 2
+        Me.Label1.Text = "Value:"
         '
         'cboSearch
         '
@@ -112,30 +131,14 @@ Partial Class frmHenry
         Me.cboSearch.Size = New System.Drawing.Size(360, 21)
         Me.cboSearch.TabIndex = 1
         '
-        'Label1
+        'lblSearch
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(7, 54)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(38, 13)
-        Me.Label1.TabIndex = 2
-        Me.Label1.Text = "Value:"
-        '
-        'txtVal
-        '
-        Me.txtVal.Location = New System.Drawing.Point(123, 51)
-        Me.txtVal.Name = "txtVal"
-        Me.txtVal.Size = New System.Drawing.Size(360, 22)
-        Me.txtVal.TabIndex = 3
-        '
-        'btnSearch
-        '
-        Me.btnSearch.Location = New System.Drawing.Point(408, 85)
-        Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(75, 23)
-        Me.btnSearch.TabIndex = 4
-        Me.btnSearch.Text = "Search"
-        Me.btnSearch.UseVisualStyleBackColor = True
+        Me.lblSearch.AutoSize = True
+        Me.lblSearch.Location = New System.Drawing.Point(7, 25)
+        Me.lblSearch.Name = "lblSearch"
+        Me.lblSearch.Size = New System.Drawing.Size(110, 13)
+        Me.lblSearch.TabIndex = 0
+        Me.lblSearch.Text = "Search inventory by:"
         '
         'grpInventory
         '
@@ -164,6 +167,10 @@ Partial Class frmHenry
         Me.btnExit.Text = "Exit"
         Me.btnExit.UseVisualStyleBackColor = True
         '
+        'errP
+        '
+        Me.errP.ContainerControl = Me
+        '
         'frmHenry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -182,6 +189,7 @@ Partial Class frmHenry
         Me.grpSearch.PerformLayout()
         Me.grpInventory.ResumeLayout(False)
         CType(Me.dgrInventory, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.errP, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -199,4 +207,5 @@ Partial Class frmHenry
     Friend WithEvents grpInventory As GroupBox
     Friend WithEvents dgrInventory As DataGridView
     Friend WithEvents btnExit As Button
+    Friend WithEvents errP As ErrorProvider
 End Class

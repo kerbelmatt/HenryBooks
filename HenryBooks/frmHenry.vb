@@ -12,6 +12,7 @@ Public Class frmHenry
             Application.Exit()
         End If
         LoadTableNames(cboTable)
+        LoadSearchChoices(cboSearch)
     End Sub
 
     Private Sub LoadTableNames(cbo As ComboBox)
@@ -33,7 +34,13 @@ Public Class frmHenry
             Case "BOOK"
                 strSP = "dbo.sp_getTableBook"
             Case "BRANCH"
-                'TODO create stored procedures for the rest of the tables
+                strSP = "dbo.sp_getTableBranch"
+            Case "INVENTORY"
+                strSP = "dbo.sp_getTableInventory"
+            Case "PUBLISHER"
+                strSP = "dbo.sp_getTablePublisher"
+            Case "WROTE"
+                strSP = "dbo.sp_getTableWrote"
             Case Else
                 MessageBox.Show("Invalid table name in btnShow_Click event", "Program error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
@@ -43,5 +50,53 @@ Public Class frmHenry
         sqlDA.Fill(dt)
         dgrInventory.DataSource = dt
         dgrInventory.AutoGenerateColumns = True
+    End Sub
+
+    Private Sub LoadSearchChoices(cbo As ComboBox)
+        cbo.Items.Add("Book Title")
+        cbo.Items.Add("Author Last Name")
+        cbo.Items.Add("Branch Name")
+        cbo.Items.Add("Publisher Name")
+    End Sub
+
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        Dim blnErrors As Boolean
+        Dim params As New ArrayList
+        If txtVal.Text.Length = 0 Then 'missing search value
+            errP.SetError(txtVal, "You must enter a search value here")
+            blnErrors = True
+        End If
+        If cboSearch.SelectedIndex = -1 Then
+            errP.SetError(cboSearch, "You must make a selection here")
+            blnErrors = True
+        End If
+        If blnErrors Then
+            Exit Sub
+        End If
+        Select Case cboSearch.SelectedItem.ToString
+            Case "Book Title"
+                params.Add(New SqlParameter("@Title", txtVal.Text))
+                sqlDA = myDB.GetDataAdapterBySP("dbo.sp_getTitleList", params)
+            Case "Author Last Name"
+                params.Add(New SqlParameter("@lastname", txtVal.Text))
+                sqlDA = myDB.GetDataAdapterBySP("dbo.sp_getAuthorList", params)
+            Case "Branch Name"
+                params.Add(New SqlParameter("@branch", txtVal.Text))
+                sqlDA = myDB.GetDataAdapterBySP("dbo.sp_getBranchList", params)
+            Case "Publisher Name"
+                params.Add(New SqlParameter("@Publisher", txtVal.Text))
+                sqlDA = myDB.GetDataAdapterBySP("dbo.sp_GetInventoryInfo", params)
+            Case Else
+                MessageBox.Show("Invalid search value in btnSearch_Click event", "Program error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Select
+        dt = New DataTable
+        sqlDA.Fill(dt)
+        dgrInventory.DataSource = dt
+        dgrInventory.AutoGenerateColumns = True
+        Exit Sub
+    End Sub
+
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        Application.Exit()
     End Sub
 End Class
