@@ -97,6 +97,9 @@ Public Class frmHenry
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        If objSQLConn.State = ConnectionState.Open Then
+            myDB.CloseDB()
+        End If
         Application.Exit()
     End Sub
 End Class
